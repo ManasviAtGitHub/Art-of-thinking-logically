@@ -15,7 +15,14 @@ public class FibonacciSeries {
     
     static int counter=0;
     private static int fib(int n){
-        if (n == 1 || n == 0){
+        
+        //whenever reaches 0 or -1...
+        if (n<=0)
+            return 0;
+       
+        // as fibonacci starts from 1,1,2,3.... 
+        // first and second both are 1
+        if (n == 1 || n == 2){
             return 1;
         }
         
@@ -34,12 +41,21 @@ public class FibonacciSeries {
         if(n<0){
             return 0;
         }
-        if (n==0 || n==1) 
-            return arr[n]=1; 
-
-        if (arr[n]!=0){
+        if (arr[n]!=0 || n==0){
             return arr[n];
         }
+        
+        if (n==0){
+            return arr[n]=0;
+        }
+        
+        if (n==2 || n==1){ 
+            return arr[n]=1; 
+        }
+        
+//        if (arr[n]!=0){
+//            return arr[n];
+//        }
         
         
         //count number of recursive calls
@@ -54,11 +70,15 @@ public class FibonacciSeries {
     
     
     public static void main(String args[]){
+        // try f = 40
         
-        int f=30;
+        
+        int f=5;
         System.out.println(fib(f));
         System.out.println(
           "Number of recursive calls : "+counter);
+        
+        
         
         counter=0;
 
