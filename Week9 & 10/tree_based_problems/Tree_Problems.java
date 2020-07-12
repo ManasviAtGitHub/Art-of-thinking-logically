@@ -92,6 +92,86 @@ public class Tree_Problems {
         return 0;
     }
 
+    public static Node findMinimum(Node root){
+	while (root.left != null) {
+            root = root.left;
+	}
+	return root;
+    }        
+    public static Node findMaximum(Node root) {
+	while (root.right != null) {
+            root = root.right;
+	}
+
+	return root;
+    }
+    public static Node findPredecessor(Node root, Node prec, int key){
+        if(root == null){
+            return prec;
+        }
+
+        if (root.key == key){
+            if (root.left != null){
+                return findMaximum(root.left);
+            }
+        }
+
+        else if (key < root.key){
+            return findPredecessor(root.left, prec, key);
+        }
+
+        else{
+
+            prec = root;
+            return findPredecessor(root.right, prec, key);
+        }
+        return prec;
+    }
+    
+    public static Node findSuccessor(Node root, Node succ, int key)
+    {
+        // base case
+	if (root == null){
+            return null;
+	}
+
+	if (root.key == key){
+            if (root.right != null) {
+		return findMinimum(root.right);
+            }
+	}
+
+	else if (key < root.key){
+
+            succ = root;
+            return findSuccessor(root.left, succ, key);
+	}
+
+	else{
+            return findSuccessor(root.right, succ, key);
+	}
+
+	return succ;
+    }
+    
+    public static void hasPath(Node root, int sum, String path){        
+        if(root!=null){
+            if(root.key>sum){            
+                return;
+            }
+            else{
+                path+=" "+root.key;
+                sum = sum - root.key;
+                if(sum==0){
+                    System.out.println(path);
+                }
+                hasPath(root.left, sum, path);
+                hasPath(root.right, sum, path);
+            }
+        }        
+    }
+    
+
 
     
 
